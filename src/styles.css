@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #f3ecdf;
+  --color-paper: #fffaf3;
+  --color-ink: #2c2824;
+  --color-sky: #2f5f7a;
+  --color-coral: #a84b3c;
+  --color-gold: #b8883a;
+  --font-display: "Fraunces", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+  --font-sans: "Source Sans 3", "Segoe UI", sans-serif;
+  --radius-card: 1.25rem;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    background-image: radial-gradient(
+      ellipse 90% 42% at 50% -12%,
+      color-mix(in srgb, var(--color-sky) 22%, transparent),
+      transparent 68%
+    );
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-sky);
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+}
+
+.stationery {
+  background-color: var(--color-paper);
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--color-ink) 7%, transparent) 0.6px,
+    transparent 0.65px
+  );
+  background-size: 8px 8px;
+  box-shadow:
+    0 1px 0 color-mix(in srgb, var(--color-ink) 6%, transparent),
+    0 18px 40px color-mix(in srgb, var(--color-ink) 8%, transparent);
+}
+
+.wing,
+.flap,
+.note-tilt {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.group:hover .wing,
+.group:focus-visible .wing {
+  transform: rotate(-14deg);
+  transition: transform 180ms ease;
+}
+
+.group:hover .note-tilt,
+.group:focus-visible .note-tilt {
+  transform: rotate(-8deg);
+  transition: transform 180ms ease;
+}
+
+.flap {
+  animation: flap 0.38s ease-in-out infinite;
+}
+
+.bird-flight {
+  animation: bird-across 2.8s cubic-bezier(0.22, 0.7, 0.3, 1) forwards;
+}
+
+.feather {
+  animation: feather 0.9s ease-in-out infinite;
+}
+
+.enter-up {
+  animation: fade-up 480ms ease-out both;
+}
+
+@keyframes flap {
+  0%,
+  100% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(-16deg);
+  }
+}
+
+@keyframes bird-across {
+  0% {
+    transform: translate3d(0, 8px, 0);
+  }
+  100% {
+    transform: translate3d(14rem, -2px, 0);
+  }
+}
+
+@keyframes feather {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-8deg);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translateY(-4px) rotate(8deg);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wing,
+  .flap,
+  .note-tilt,
+  .bird-flight,
+  .feather,
+  .enter-up {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .bird-flight {
+    left: 50%;
+    transform: translateX(-50%) !important;
+  }
+}
