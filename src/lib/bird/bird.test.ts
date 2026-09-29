@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { createHmac } from "node:crypto";
 import { describe, it } from "node:test";
 import { renderAnonymousMessageEmail } from "../../emails/anonymousMessage.ts";
-import { sendAnonymousMessage } from "../email/sendAnonymousMessage.server.ts";
+import { readSmtpConfig, sendAnonymousMessage } from "../email/sendAnonymousMessage.server.ts";
 import { COPY } from "./copy.ts";
 import { escapeHtml } from "./escape.ts";
 import {
@@ -234,6 +234,7 @@ describe("email sending", () => {
       },
       {
         apiKey: null,
+        smtp: null,
         fetchImpl: async () => {
           called = true;
           return new Response("{}");
@@ -243,6 +244,58 @@ describe("email sending", () => {
     assert.equal(called, false);
     assert.equal(result.ok, true);
     if (result.ok) assert.equal(result.mode, "preview");
+  });
+
+  it("sends through SMTP when a mailbox is configured", async () => {
+    let captured: { from?: string; to?: string; subject?: string; replyTo?: string } | null = null;
+    const result = await sendAnonymousMessage(
+      {
+        to: "a@example.com",
+        message: "hi",
+        blockUrl: "https://alittlebird.com/block",
+        reportUrl: "https://alittlebird.com/report",
+        aboutUrl: "https://alittlebird.com/about",
+        privacyUrl: "https://alittlebird.com/privacy",
+        termsUrl: "https://alittlebird.com/terms",
+      },
+      {
+        apiKey: null,
+        smtp: {
+          host: "smtp.purelymail.com",
+          port: 465,
+          secure: true,
+          user: "bird@alittlebird.com",
+          pass: "secret",
+        },
+        sendMail: async (message) => {
+          captured = message;
+          return { messageId: "<abc@alittlebird.com>" };
+        },
+      },
+    );
+    assert.equal(result.ok, true);
+    if (result.ok) {
+      assert.equal(result.mode, "accepted");
+      assert.equal(result.providerId, "<abc@alittlebird.com>");
+    }
+    assert.equal(captured?.to, "a@example.com");
+    assert.equal(captured?.subject, "a little bird told us something...");
+    assert.equal(captured?.replyTo, "noreply@alittlebird.com");
+  });
+
+  it("reads Purelymail defaults from SMTP user and password", () => {
+    const smtp = readSmtpConfig({
+      SMTP_USER: "bird@alittlebird.com",
+      SMTP_PASS: "secret",
+    });
+    assert.deepEqual(smtp, {
+      host: "smtp.purelymail.com",
+      port: 465,
+      secure: true,
+      user: "bird@alittlebird.com",
+      pass: "secret",
+    });
+    assert.equal(readSmtpConfig({}), null);
   });
 });
 

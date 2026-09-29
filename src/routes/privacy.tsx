@@ -59,7 +59,7 @@ function PrivacyPage() {
       </p>
       <h2>who else processes data</h2>
       <p>
-        Email is sent with a provider such as Resend, which receives the recipient address, the note, and delivery metadata. Hosting and the database are provided by our infrastructure host. If an AI safety check is enabled, the note text (not the recipient address) may be sent to xAI for a yes-or-no abuse decision and is not stored by us afterward.
+        Email is sent through the mail host for this domain, which receives the recipient address, the note, and delivery metadata. Hosting and the database are provided by our infrastructure host. If an AI safety check is enabled, the note text (not the recipient address) may be sent to xAI for a yes-or-no abuse decision and is not stored by us afterward.
       </p>
       <h2>legal requests</h2>
       <p>

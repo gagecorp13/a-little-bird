@@ -38,9 +38,13 @@ Documented in [`.env.example`](.env.example). Set them in the host, not in a com
 | --- | --- | --- |
 | `APP_SECRET` | Production | Pepper for hashes and HMAC tokens. Long random string. |
 | `APP_URL` | Production | Public origin for links inside emails, e.g. `https://alittlebird.com`. |
-| `RESEND_API_KEY` | To send real mail | Resend API key. Server-side only. |
-| `EMAIL_FROM` | Recommended | Default `a little bird <bird@alittlebird.com>`. |
+| `SMTP_USER` | To send real mail | Full Purelymail address, e.g. `bird@alittlebird.com`. |
+| `SMTP_PASS` | To send real mail | That mailbox's password, or an app password if two-factor is on. |
+| `SMTP_HOST` | Optional | Defaults to `smtp.purelymail.com`. |
+| `SMTP_PORT` | Optional | Defaults to `465` (SSL). |
+| `EMAIL_FROM` | Recommended | Default `a little bird <bird@alittlebird.com>`. Must be that mailbox or an alias. |
 | `EMAIL_REPLY_TO` | Recommended | Default `noreply@alittlebird.com`. Replies do not reach the sender. |
+| `RESEND_API_KEY` | Optional fallback | Used only when SMTP is unset. |
 | `RESEND_WEBHOOK_SECRET` | Recommended | Svix signing secret for `POST /api/email/webhook`. |
 | `TURNSTILE_SECRET_KEY` | Recommended | Cloudflare Turnstile secret. Verified on the server. |
 | `VITE_TURNSTILE_SITE_KEY` | With Turnstile | Public site key. The only email-protection value that may use a `VITE_` prefix. |
@@ -48,11 +52,11 @@ Documented in [`.env.example`](.env.example). Set them in the host, not in a com
 
 `XAI_API_KEY`, when the host injects it, adds one short safety classification on send. Heuristics still run if it is absent. The note text is sent for that check; the recipient address is not.
 
-Never expose `RESEND_API_KEY`, `APP_SECRET`, `TURNSTILE_SECRET_KEY`, `DATABASE_URL`, or webhook secrets to the browser.
+Never expose `SMTP_PASS`, `RESEND_API_KEY`, `APP_SECRET`, `TURNSTILE_SECRET_KEY`, `DATABASE_URL`, or webhook secrets to the browser.
 
 ## Email
 
-Sending lives in `src/lib/email/sendAnonymousMessage.server.ts`. Swap the provider there without rewriting the form.
+Sending lives in `src/lib/email/sendAnonymousMessage.server.ts`. Production mail goes out through Purelymail SMTP (`smtp.purelymail.com:465`). Resend remains a fallback when SMTP is unset.
 
 - From name: **a little bird**
 - Suggested from address: `bird@alittlebird.com`
