@@ -100,7 +100,7 @@ function ReportPage() {
             <button
               type="submit"
               disabled={!token || pending}
-              className="inline-flex min-h-12 items-center rounded-full bg-ink px-5 text-paper disabled:opacity-60"
+              className="sign inline-flex min-h-12 items-center px-5 text-2xl disabled:opacity-60"
             >
               {pending ? "sending…" : "submit report"}
             </button>

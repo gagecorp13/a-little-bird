@@ -43,7 +43,7 @@ function HowItWorks() {
         </p>
         <ol className="mt-8 space-y-6">
           {STEPS.map((step) => (
-            <li key={step.n} className="stationery rounded-2xl border border-ink/10 px-5 py-5">
+            <li key={step.n} className="stationery px-5 py-5">
               <p className="font-display text-sm text-coral">step {step.n}</p>
               <h2 className="mt-1 font-display text-2xl text-ink">{step.title}</h2>
               <p className="mt-2 text-pretty leading-relaxed text-ink/85">{step.body}</p>
@@ -55,7 +55,7 @@ function HowItWorks() {
         </p>
         <Link
           to="/"
-          className="mt-6 inline-flex min-h-12 items-center rounded-full bg-coral px-5 text-paper"
+          className="sign mt-6 inline-flex min-h-12 items-center px-5 text-2xl"
         >
           write a note
         </Link>

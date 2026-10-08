@@ -7,7 +7,7 @@ export function MessagePreview({ email, message }: { email: string; message: str
       </div>
       <div>
         <p className="text-sm text-ink/60">message</p>
-        <p className="mt-1 max-h-48 overflow-y-auto whitespace-pre-wrap break-words rounded-xl bg-cream px-3 py-3 text-base leading-relaxed text-ink">
+        <p className="mt-1 max-h-48 overflow-y-auto whitespace-pre-wrap break-words rounded-md border-2 border-paper bg-paper px-3 py-3 text-lg leading-relaxed text-night">
           {message}
         </p>
       </div>

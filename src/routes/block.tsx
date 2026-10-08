@@ -84,7 +84,7 @@ function BlockPage() {
           <button
             type="button"
             onClick={() => void undo()}
-            className="mt-8 inline-flex min-h-12 items-center rounded-full border border-ink/20 bg-paper px-5 text-ink"
+            className="mt-8 inline-flex min-h-12 items-center border-2 border-paper bg-paper px-5 text-lg text-night"
           >
             changed your mind? allow messages again
           </button>

@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { BirdMark } from "./BirdLogo";
 
 const LINKS = [
   { to: "/how-it-works", label: "how it works" },
@@ -9,18 +8,17 @@ const LINKS = [
 
 export function Header() {
   return (
-    <header className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-4 sm:px-6">
-      <Link to="/" className="flex items-center gap-2 rounded-md" aria-label="a little bird, home">
-        <BirdMark className="h-10 w-12" />
-        <span className="font-display text-xl tracking-tight text-ink">a little bird</span>
+    <header className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3 sm:px-6">
+      <Link to="/" className="rounded-md font-display text-2xl text-paper" aria-label="a little bird, home">
+        a little bird
       </Link>
       <nav aria-label="primary" className="flex items-center gap-1 sm:gap-2">
         {LINKS.map((link) => (
           <Link
             key={link.to}
             to={link.to}
-            className="inline-flex min-h-11 items-center rounded-md px-2 text-sm text-ink/75 hover:text-ink sm:px-3"
-            activeProps={{ className: "inline-flex min-h-11 items-center rounded-md px-2 text-sm text-ink sm:px-3" }}
+            className="inline-flex min-h-11 items-center px-2 text-lg text-paper/80 hover:text-paper sm:px-3"
+            activeProps={{ className: "inline-flex min-h-11 items-center px-2 text-lg text-paper sm:px-3" }}
           >
             {link.label}
           </Link>

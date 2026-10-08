@@ -5,7 +5,7 @@ export function CharacterCounter({ value }: { value: string }) {
   const over = count > MAX_MESSAGE_LENGTH;
   return (
     <p
-      className={`text-right text-sm tabular-nums ${over ? "text-coral" : "text-ink/55"}`}
+      className={`text-right text-base tabular-nums ${over ? "text-coral" : "text-paper/70"}`}
       aria-live="polite"
     >
       {count.toLocaleString("en-US")} / {MAX_MESSAGE_LENGTH.toLocaleString("en-US")}

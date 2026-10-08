@@ -10,11 +10,11 @@ const LINKS = [
 
 export function Footer() {
   return (
-    <footer className="mx-auto w-full max-w-5xl px-4 py-8 text-sm text-ink/70 sm:px-6">
-      <p className="font-display text-base text-ink">sometimes things are easier said anonymously.</p>
+    <footer className="mx-auto w-full max-w-6xl px-4 py-8 text-lg text-paper/80 sm:px-6">
+      <p className="font-display text-xl text-paper">sometimes things are easier said anonymously.</p>
       <nav aria-label="footer" className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
         {LINKS.map((link) => (
-          <Link key={link.to} to={link.to} className="inline-flex min-h-11 items-center underline decoration-ink/20 underline-offset-4 hover:text-ink">
+          <Link key={link.to} to={link.to} className="inline-flex min-h-11 items-center underline decoration-paper/40 underline-offset-4 hover:text-paper">
             {link.label}
           </Link>
         ))}

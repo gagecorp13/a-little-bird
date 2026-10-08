@@ -1,32 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-  --color-cream: #f3ecdf;
-  --color-paper: #fffaf3;
-  --color-ink: #2c2824;
-  --color-sky: #2f5f7a;
-  --color-coral: #a84b3c;
-  --color-gold: #b8883a;
-  --font-display: "Fraunces", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
-  --font-sans: "Source Sans 3", "Segoe UI", sans-serif;
-  --radius-card: 1.25rem;
+  --color-field: #da4714;
+  --color-cream: #fff6ea;
+  --color-paper: #fffdf8;
+  --color-ink: #fffdf8;
+  --color-night: #1a120e;
+  --color-sky: #fffdf8;
+  --color-coral: #ffe14a;
+  --color-gold: #ffe14a;
+  --font-display: "Patrick Hand", "Comic Sans MS", cursive;
+  --font-sans: "Patrick Hand", "Segoe UI", cursive;
+  --radius-card: 1.4rem;
 }
 
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
     font-family: var(--font-sans);
-    background-color: var(--color-cream);
+    font-size: 1.125rem;
+    background-color: var(--color-field);
     color: var(--color-ink);
-    background-image: radial-gradient(
-      ellipse 90% 42% at 50% -12%,
-      color-mix(in srgb, var(--color-sky) 22%, transparent),
-      transparent 68%
-    );
     min-height: 100vh;
     overflow-x: hidden;
   }
@@ -37,7 +34,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-sky);
+    outline: 2px solid var(--color-paper);
     outline-offset: 3px;
   }
 
@@ -46,18 +43,56 @@
   h3 {
     text-wrap: balance;
   }
+
+  input,
+  textarea,
+  select {
+    color: var(--color-night);
+    background-color: var(--color-paper);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: color-mix(in srgb, var(--color-night) 45%, transparent);
+  }
 }
 
-.stationery {
-  background-color: var(--color-paper);
-  background-image: radial-gradient(
-    color-mix(in srgb, var(--color-ink) 7%, transparent) 0.6px,
-    transparent 0.65px
-  );
-  background-size: 8px 8px;
-  box-shadow:
-    0 1px 0 color-mix(in srgb, var(--color-ink) 6%, transparent),
-    0 18px 40px color-mix(in srgb, var(--color-ink) 8%, transparent);
+.stationery,
+.ink-frame {
+  background: transparent;
+  border: 2px solid var(--color-paper);
+  border-radius: 1.8rem 1.15rem 1.7rem 1.05rem;
+  box-shadow: none;
+}
+
+.sign {
+  background: #141414;
+  color: var(--color-paper);
+  font-family: var(--font-display);
+  line-height: 1.05;
+  box-shadow: 3px 4px 0 rgb(0 0 0 / 0.2);
+}
+
+.sign:hover {
+  transform: rotate(-1.2deg);
+}
+
+.sign:active {
+  transform: scale(0.98);
+}
+
+.hang {
+  position: relative;
+}
+
+.hang::before {
+  content: "";
+  position: absolute;
+  left: 18%;
+  bottom: 100%;
+  width: 2px;
+  height: 1.4rem;
+  background: #141414;
 }
 
 .wing,
@@ -143,10 +178,14 @@
   .note-tilt,
   .bird-flight,
   .feather,
-  .enter-up {
+  .enter-up,
+  .sign {
     animation: none !important;
     transition: none !important;
-    transform: none !important;
+  }
+
+  .sign:hover {
+    transform: none;
   }
 
   .bird-flight {

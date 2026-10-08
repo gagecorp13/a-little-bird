@@ -29,7 +29,7 @@ export function SuccessAnimation({
       <button
         type="button"
         onClick={onAgain}
-        className="mt-6 inline-flex min-h-12 items-center rounded-full bg-ink px-5 text-base text-paper transition-transform duration-150 ease-out active:scale-[0.96]"
+        className="sign mt-6 inline-flex min-h-12 items-center px-5 text-2xl"
       >
         send another
       </button>

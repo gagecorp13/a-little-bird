@@ -14,7 +14,7 @@ export const Route = createRootRoute({
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "a little bird — send an anonymous note" },
       { name: "description", content: DESCRIPTION },
-      { name: "theme-color", content: "#f3ecdf" },
+      { name: "theme-color", content: "#da4714" },
       { name: "robots", content: "index, follow" },
     ],
     links: [
@@ -24,7 +24,7 @@ export const Route = createRootRoute({
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520;9..144,640&family=Source+Sans+3:ital,wght@0,400;0,580;0,680;1,400&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap",
       },
       { rel: "canonical", href: "https://alittlebird.com/" },
       { rel: "manifest", href: "/__grok/manifest.webmanifest" },
@@ -57,7 +57,7 @@ export const Route = createRootRoute({
         <p className="mt-3 text-ink/75">that address isn't on the route.</p>
         <Link
           to="/"
-          className="mt-6 inline-flex min-h-12 items-center rounded-full bg-ink px-5 text-paper"
+          className="sign mt-6 inline-flex min-h-12 items-center px-5 text-2xl"
         >
           back home
         </Link>

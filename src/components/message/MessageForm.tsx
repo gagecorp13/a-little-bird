@@ -1,5 +1,4 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { BirdMark } from "@/components/site/BirdLogo";
 import { COPY } from "@/lib/bird/copy";
 import { track, visitorKey } from "@/lib/bird/track";
 import { MAX_MESSAGE_LENGTH, normalizeEmail, normalizeMessage } from "@/lib/bird/validate";
@@ -11,7 +10,7 @@ import { TurnstileField } from "./TurnstileField";
 type Step = "compose" | "confirm" | "success";
 
 const fieldClass =
-  "mt-2 w-full rounded-xl border border-ink/15 bg-paper px-3 py-3 text-base text-ink placeholder:text-ink/40";
+  "mt-2 w-full rounded-md border-2 border-paper bg-paper px-3 py-3 text-lg text-night placeholder:text-night/40";
 
 export function MessageForm() {
   const emailId = useId();
@@ -97,9 +96,8 @@ export function MessageForm() {
   }
 
   return (
-    <div className="relative mx-auto mt-8 w-full max-w-xl">
-      <BirdMark className="pointer-events-none absolute -top-8 right-2 z-10 h-12 w-14 sm:-top-9 sm:right-5 sm:h-16 sm:w-20" />
-      <section id="note" className="stationery rounded-2xl border border-ink/10 px-4 pt-9 pb-5 sm:px-6 sm:pt-10 sm:pb-6">
+    <div className="relative mx-auto mt-6 w-full max-w-xl">
+      <section id="note" className="ink-frame px-4 py-5 sm:px-6 sm:py-6">
         {step === "compose" ? (
           <form
             onSubmit={(event) => {
@@ -117,7 +115,7 @@ export function MessageForm() {
                 autoComplete="off"
               />
             </div>
-            <label htmlFor={emailId} className="block pr-12 font-display text-lg text-ink">
+            <label htmlFor={emailId} className="block font-display text-2xl text-paper">
               who should the bird visit?
             </label>
             <input
@@ -132,7 +130,7 @@ export function MessageForm() {
               className={fieldClass}
               required
             />
-            <label htmlFor={messageId} className="mt-5 block font-display text-lg text-ink">
+            <label htmlFor={messageId} className="mt-5 block font-display text-2xl text-paper">
               what should the bird tell them?
             </label>
             <textarea
@@ -154,33 +152,32 @@ export function MessageForm() {
             </div>
             <TurnstileField onToken={setToken} />
             {error ? (
-              <p role="alert" className="mt-3 text-sm text-coral">
+              <p role="alert" className="mt-3 bg-coral px-2 py-1 text-base text-night">
                 {error}
               </p>
             ) : null}
             <button
               type="submit"
               data-testid="send-bird"
-              className="group mt-4 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-coral px-5 text-base text-paper transition-transform duration-150 ease-out active:scale-[0.96] sm:w-auto"
+              className="sign mt-4 inline-flex min-h-12 w-full items-center justify-center px-5 text-2xl sm:w-auto"
             >
-              <BirdMark className="h-6 w-8" />
               send the bird →
             </button>
-            <p className="mt-4 text-sm text-ink/65">Your identity isn't included with the message.</p>
+            <p className="mt-4 text-lg text-paper/80">Your identity isn't included with the message.</p>
           </form>
         ) : null}
 
         {step === "confirm" ? (
           <div>
-            <h2 ref={headingRef} tabIndex={-1} className="font-display text-3xl text-ink outline-none">
+            <h2 ref={headingRef} tabIndex={-1} className="font-display text-3xl text-paper outline-none">
               ready to let it fly?
             </h2>
             <div className="mt-4">
               <MessagePreview email={email} message={message} />
             </div>
-            <p className="mt-4 text-sm text-ink/70">Your identity won't be included with the message.</p>
+            <p className="mt-4 text-lg text-paper/80">Your identity won't be included with the message.</p>
             {error ? (
-              <p role="alert" className="mt-3 text-sm text-coral">
+              <p role="alert" className="mt-3 bg-coral px-2 py-1 text-base text-night">
                 {error}
               </p>
             ) : null}
@@ -191,7 +188,7 @@ export function MessageForm() {
                   setError("");
                   setStep("compose");
                 }}
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-ink/20 bg-paper px-5 text-base text-ink"
+                className="inline-flex min-h-12 items-center justify-center border-2 border-paper bg-transparent px-5 text-xl text-paper"
               >
                 ← make a change
               </button>
@@ -201,7 +198,7 @@ export function MessageForm() {
                 onClick={() => void send()}
                 disabled={sending}
                 aria-busy={sending}
-                className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-coral px-5 text-base text-paper transition-transform duration-150 ease-out active:scale-[0.96] disabled:opacity-70"
+                className="sign inline-flex min-h-12 items-center justify-center px-5 text-2xl disabled:opacity-70"
               >
                 {sending ? "sending…" : "send it →"}
               </button>
