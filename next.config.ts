@@ -3,6 +3,16 @@ const config: NextConfig = {
   allowedDevOrigins: ["127.0.0.1", "localhost"],
   agentRules: false,
   poweredByHeader: false,
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.alittlebird.com" }],
+        destination: "https://alittlebird.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

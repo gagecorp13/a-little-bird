@@ -757,3 +757,7 @@ This section records the implementation produced from the specification. It does
 - `QA_REPORT.md` in the repository records release verification and remaining limits. Development-only lint dependencies currently have a reported `braces` denial-of-service advisory with no compatible published fix observed; production dependency audit reports no vulnerabilities. This is recorded rather than hidden by an incompatible downgrade.
 
 The instructions remain deliberately more detailed than the initial disabled release. Do not interpret a checked disabled UI as proof that real delivery, all email clients, or every production failure mode has been exercised.
+
+### Publication verification
+
+The implemented website was published to **https://alittlebird.com** and pushed to the existing GitHub `main` branch. Vercel's production build succeeded on Node.js 24.x and GitHub CI passed. All four browser tests passed against the live domain. The disabled send endpoint returned 503, the excluded read route returned 404, and three viewport captures showed no horizontal overflow or console errors. SPF, DKIM, and DMARC records resolve publicly; Resend's verification remained pending at the latest check. Cloudflare Siteverify accepted the real secret and correctly rejected an invalid response; that is a configuration check, not a successful real visitor challenge. The canonical www redirect is included in the final build. Delivery remains disabled as explicitly authorized by the owner.

@@ -25,6 +25,12 @@ Illustrated Next.js replacement of the previous generated application. Sending r
 
 ## Required before enabling delivery
 
+## Published deployment checks
+
+The production deployment is live at https://alittlebird.com. Vercel's Node.js 24.x build succeeded and GitHub CI passed. All four browser tests passed against the actual live domain; desktop/mobile/narrow-phone capture reported no console errors or horizontal overflow. The disabled send API returned 503, recipient action links remained inert on GET, and the excluded read route returned 404. Production responses include the privacy/security headers and no-store policy. The www host redirects to the canonical origin so browser form requests use the configured origin.
+
+## Required before enabling delivery
+
 Resolve Resend's permitted-use/recipient-opt-in requirements for this service, then complete domain verification and least-privilege API-key review. Exercise real Turnstile success, expiry, replay, wrong-host/action and provider failures. Use an explicit consenting allowlist for actual delivery tests; inspect received plain text/HTML and SPF/DKIM/DMARC results. Exercise opt-out/report persistence and authenticated complaint/permanent-bounce webhooks end to end, including replay and Redis failure. Verify reduced motion, keyboard/screen-reader interaction, email-client fragment links, and safety under deployment concurrency.
 
 No real recipient email has been sent during this release. Public sending stays disabled until the prerequisites and tests are complete. See BUILD_INSTRUCTIONS.md for the detailed activation checklist and rollback procedure.
